@@ -12,8 +12,8 @@ public class Main  {
 		//RUTAS: son variables que se usan para determinar la ruta de los archivos que se leeran, asi cuando esten probando con distintas entradas solo tengan que cambiar la ruta en estas 2 variables
 		//ruta1:la ruta del archivo de Participantes.txt
 		//ruta2: la ruta de los registros Consumidos.txt
-		String ruta1 = "Participantes.txt";
-		String ruta2 = "a.txt";
+		String ruta1 = "C:/Users/Juan/Documents/taller 2/registro manual/Participantes.txt";
+		String ruta2 = "C:/Users/Juan/Documents/taller 2/registro manual/Consumido.txt";
 		
 		
 		
@@ -80,7 +80,7 @@ public class Main  {
 				if(tipo.equals("Choripan")) {
 					largo = Integer.valueOf(valor1);
 					ancho = Integer.valueOf(partes[3]);
-					choripan pruebaChoripan = new choripan(partes[4],largo ,ancho);
+					choripan pruebaChoripan = new choripan(partes[4],largo ,ancho, aux+1);
 					//index va a ser el indice para ubicar en que parte de la lista amigos se encuentra la persona actual
 					index = buscarNombre(nombre, amigos);
 					amigos[index].setChoripanes(pruebaChoripan, amigos[index].getIndexContadorChoripanTerremoto(0));
@@ -89,7 +89,7 @@ public class Main  {
 					
 				}else if((tipo.equals("Terremoto"))){
 				    float LT = Float.valueOf(valor1);
-				    Terremotos elterremoto = new Terremotos(LT, partes[3]);
+				    Terremotos elterremoto = new Terremotos(LT, partes[3], aux+1);
 					index = buscarNombre(nombre, amigos);
 					amigos[index].setTerremotos(elterremoto, amigos[index].getIndexContadorChoripanTerremoto(1));
 					amigos[index].sumarChoripanTerremoto(1);
@@ -117,7 +117,7 @@ public class Main  {
 				if(tipo.equals("Choripan")) {
 					largo = Integer.valueOf(valor1);
 					ancho = Integer.valueOf(partes[3]);
-					choripan pruebaChoripan = new choripan(partes[4],largo ,ancho);
+					choripan pruebaChoripan = new choripan(partes[4],largo ,ancho, aux+1);
 					//index va a ser el indice para ubicar en que parte de la lista amigos se encuentra la persona actual
 					index = buscarNombre(nombre, amigos);
 					amigos[index].setChoripanes(pruebaChoripan, amigos[index].getIndexContadorChoripanTerremoto(0));
@@ -126,7 +126,7 @@ public class Main  {
 					
 				}else if((tipo.equals("Terremoto"))){
 				    float LT = Float.valueOf(valor1);
-				    Terremotos elterremoto = new Terremotos(LT, partes[3]);
+				    Terremotos elterremoto = new Terremotos(LT, partes[3], aux+1);
 					index = buscarNombre(nombre, amigos);
 					amigos[index].setTerremotos(elterremoto, amigos[index].getIndexContadorChoripanTerremoto(1));
 					amigos[index].sumarChoripanTerremoto(1);
@@ -165,13 +165,52 @@ public class Main  {
 			
 			
 			if(opcion.equals("1")) {
-				System.out.println();
-				System.out.println("se escogio 1");
-				System.out.println();
-				
+			    do{
+			        System.out.println("");
+			        
+    				System.out.println("============ VER REGISTROS =================");
+    				System.out.println("  [1] Choripanes");
+    				System.out.println("  [2] Terremotos");
+    				System.out.println("  [3] Volver al menu principal");
+    				System.out.println("============================================");
+    				System.out.print("Seleccione una opcion: ");
+    				opcion = key.nextLine();
+    				if(!(opcion.equals("1") || opcion.equals("2") || opcion.equals("3"))){
+    				    System.out.println("mensaje de error no se ingreso una  opcion valida, intentar de nuevo");
+    				}
+			    }while(!(opcion.equals("1") || opcion.equals("2")));
+			    
 				System.out.println("estas son las kcal "+amigos[0].getChoripanes(0).getKcal());							
+				System.out.println("");
 				
-					
+				if(opcion.equals("1")){
+				    System.out.println("");
+				    System.out.println("=============== CHORIPANES =================");
+				    System.out.println("  #   Consumidor    Largo   Ancho   Fecha         KCal");
+				    //aqui se muestra el registro
+				    System.out.println("--------------------------------------------------");
+				    System.out.println("  Total: "+ "(inserte cantidad de choripanes)" +" choripanes registrados");
+				    System.out.println("==================================================");
+				    System.out.println("");
+				    System.out.print("Presione ENTER para continuar...");
+				    opcion = key.nextLine();
+				    opcion = "";
+				}else if(opcion.equals("2")){
+				    System.out.println("");
+				    System.out.println("=============== TERREMOTOS =================");
+				    System.out.println("  #   Consumidor    Litros   Fecha         KCal");
+				    for(int i = 1; i<=valorRegistros; i++){//aqui se muestra el registro
+				        
+				        System.out.println("  "+i+"   " +amigos[0].getNombre()  );
+				    }
+				    System.out.println("--------------------------------------------------");
+				    System.out.println("  Total:"+ "(inserte cantidad de terremotos)" +  " terremotos registrados "+ "(inserte cantidad de litros");
+				    System.out.println("==================================================");
+				    System.out.println("");
+				    System.out.print("Presione ENTER para continuar...");
+				    opcion = key.nextLine();
+				    opcion = "";
+				}
 					
 					
 

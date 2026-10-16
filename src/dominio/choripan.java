@@ -5,11 +5,13 @@ public class choripan {
 	private int largo;
 	private int ancho;
 	private float kcal;
-	public choripan(String fecha, int largo, int ancho ) {
+	private int contador;
+	public choripan(String fecha, int largo, int ancho, int contador ) {
 		this.fecha = fecha;
 		this.largo = largo;
 		this.ancho = ancho;
 		this.kcal = (largo* ancho) / 3;
+		this.contador = contador;
 	}
 	public int getLargo() {
 		return largo;
@@ -38,5 +40,3 @@ public class choripan {
 	}
 	
 }
-
-
