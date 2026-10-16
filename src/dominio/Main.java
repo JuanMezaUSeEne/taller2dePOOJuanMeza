@@ -12,8 +12,8 @@ public class Main  {
 		//RUTAS: son variables que se usan para determinar la ruta de los archivos que se leeran, asi cuando esten probando con distintas entradas solo tengan que cambiar la ruta en estas 2 variables
 		//ruta1:la ruta del archivo de Participantes.txt
 		//ruta2: la ruta de los registros Consumidos.txt
-		String ruta1 = "C:/Users/Juan/Documents/taller 2/registro manual/Participantes.txt";
-		String ruta2 = "C:/Users/Juan/Documents/taller 2/registro manual/Consumido.txt";
+		String ruta1 = "Participantes.txt";
+		String ruta2 = "a.txt";
 		
 		
 		
@@ -22,8 +22,9 @@ public class Main  {
 		String linea = lectura.nextLine(); 
 		persona[] amigos = new persona[200];
 		int aux = 0;
-		amigos[aux] = new persona(linea);
-		
+		if(!linea.equals("")){
+		    amigos[aux] = new persona(linea);
+		}
 		while (lectura.hasNextLine()) {
 			aux++;
 			linea = lectura.nextLine(); 
@@ -68,8 +69,9 @@ public class Main  {
 		aux = 0;
 		int index;
 		
-		
+		//aqui se inicia el while donde se ingresan los datos
 		while (lectura2.hasNextLine()) {
+		    System.out.println(linea2);
 			if(partes.length == 4 || partes.length == 5 ) {
 				tipo = partes[0];
 				nombre = partes[1];
@@ -86,8 +88,12 @@ public class Main  {
 					System.out.println(amigos[0].getNombre()+ " lleva "+ amigos[index].getIndexContadorChoripanTerremoto(0)+ " choripanes");
 					
 				}else if((tipo.equals("Terremoto"))){
-					
-					
+				    float LT = Float.valueOf(valor1);
+				    Terremotos elterremoto = new Terremotos(LT, partes[3]);
+					index = buscarNombre(nombre, amigos);
+					amigos[index].setTerremotos(elterremoto, amigos[index].getIndexContadorChoripanTerremoto(1));
+					amigos[index].sumarChoripanTerremoto(1);
+					System.out.println(amigos[0].getNombre()+ " lleva "+ amigos[index].getIndexContadorChoripanTerremoto(1)+ " terremotos");
 				}
 			}
 			aux++;
@@ -98,9 +104,42 @@ public class Main  {
 			System.out.println(aux);
 			
 			
-		}
+		}//aqui termina el while donde se ingresan los datos
 		
-		System.out.println(amigos[1].getNombre()+ " se comio "+ amigos[1].getIndexContadorChoripanTerremoto(0)+ " choripanes");
+		
+		
+		//inicia el if para ingresar los datos de la ultima linea que no se ingresaron dentro del while
+		if(partes.length == 4 || partes.length == 5 ) {
+				tipo = partes[0];
+				nombre = partes[1];
+				valor1 = partes[2];
+				
+				if(tipo.equals("Choripan")) {
+					largo = Integer.valueOf(valor1);
+					ancho = Integer.valueOf(partes[3]);
+					choripan pruebaChoripan = new choripan(partes[4],largo ,ancho);
+					//index va a ser el indice para ubicar en que parte de la lista amigos se encuentra la persona actual
+					index = buscarNombre(nombre, amigos);
+					amigos[index].setChoripanes(pruebaChoripan, amigos[index].getIndexContadorChoripanTerremoto(0));
+					amigos[index].sumarChoripanTerremoto(0);
+					System.out.println(amigos[0].getNombre()+ " lleva "+ amigos[index].getIndexContadorChoripanTerremoto(0)+ " choripanes");
+					
+				}else if((tipo.equals("Terremoto"))){
+				    float LT = Float.valueOf(valor1);
+				    Terremotos elterremoto = new Terremotos(LT, partes[3]);
+					index = buscarNombre(nombre, amigos);
+					amigos[index].setTerremotos(elterremoto, amigos[index].getIndexContadorChoripanTerremoto(1));
+					amigos[index].sumarChoripanTerremoto(1);
+					System.out.println(amigos[0].getNombre()+ " lleva "+ amigos[index].getIndexContadorChoripanTerremoto(1)+ " terremotos");
+				}
+			}// termina el if
+		
+		
+		
+		
+		
+		
+		System.out.println(amigos[0].getNombre()+ " se comio "+ amigos[0].getIndexContadorChoripanTerremoto(0)+ " choripanes y "+ amigos[0].getIndexContadorChoripanTerremoto(1)+ " terremotos");
 		String opcion;
 		int valorRegistros = aux+1;
 		
@@ -173,7 +212,7 @@ public class Main  {
 		
 		int a = 0;
 		for(a = 0; a<200; a++) {
-			System.out.println(lista[a].getNombre()+ " "+ a);
+			
 			if(lista[a].getNombre().equals(objetivo)) {
 				break;
 			}

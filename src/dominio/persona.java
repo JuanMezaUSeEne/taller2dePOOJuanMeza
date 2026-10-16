@@ -1,9 +1,12 @@
 package dominio;
 
 public class persona {
+    
 	private String nombre;
 	private choripan[] choripanes = new choripan[200];
+	private Terremotos[] listaterremotos = new Terremotos[200];
 	private int[] contador_choripan_terremoto = new int[2];
+	
 	public persona(String nombre) {
 		this.nombre = nombre;
 	}
@@ -21,6 +24,12 @@ public class persona {
 	}
 	
 	
+	public void setTerremotos(Terremotos listaterremotos, int aux) {
+		this.listaterremotos[aux] = listaterremotos;
+	}
+	public Terremotos getTerremotos(int aux){
+	    return listaterremotos[aux];
+	}
 	
 	public void sumarChoripanTerremoto(int opcion){
 		if(opcion == 0) {
