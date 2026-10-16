@@ -7,7 +7,7 @@ import java.io.File;
 
 public class Main  {
 	public static void main (String[] args) throws IOException{
-		File arch = new File("C:/Users/Juan/Documents/taller 2/registro manual/Participantes.txt");
+		File arch = new File("C:/Users/Juan/Documents/taller 2/registro manual/Participantes.txt"); //el archivo de las personas que participan
 		Scanner lectura = new Scanner(arch);
 		String linea = lectura.nextLine(); 
 		persona[] amigos = new persona[20];
@@ -22,6 +22,13 @@ public class Main  {
 		//for (int i = 0; i<aux; i++) {
 		//	System.out.println(amigos[i].getNombre()); //probando si el algoritmo creo y almaceno los nombres de las instancias de amigos
 		//}
+		File arch2 = new File("C:/Users/Juan/Documents/taller 2/registro manual/Consumido.txt");//SEGUNDO ARCHIVO CON LOS REGISTROS DE LOS CHORIPANES Y TERREMOTOS
+		Scanner lectura2 = new Scanner(arch2);
+		String linea2 = lectura2.nextLine();
+		while (lectura2.hasNextLine()) {
+			System.out.println(linea2);
+			linea2 = lectura2.nextLine(); //prueba para ver si lee bien los datos del archivo
+		}
 		
 		
 		String opcion;
@@ -43,20 +50,45 @@ public class Main  {
 			System.out.println("==============================");
 			System.out.print("Seleccione una opcion: ");
 			opcion = key.nextLine();
-			if(opcion == "1") {
+			
+			
+			if(opcion.equals("1")) {
+				
+				System.out.println();
 				System.out.println("se escogio 1");
-			}else if (opcion == "2") {
+				System.out.println();
+				
+			}else if (opcion.equals("2")) {
+				
+				System.out.println();
 				System.out.println("se escogio 2");
-			}else if (opcion == "3") {
+				System.out.println();
+				
+			}else if (opcion.equals("3")) {
+				
+				System.out.println();
 				System.out.println("se escogio 3");
-			}else if (opcion == "4") {
+				System.out.println();
+				
+			}else if (opcion.equals("4")) {
+				
+				System.out.println();
 				System.out.println("se escogio [4] Salir");
+				System.out.println();
+				
 			}else {
 				System.out.println();
 				System.out.println("opcion invalida, por favor ingrese de nuevo");
 				System.out.println();
 			}
-		}while(opcion != "4");
+
+		}while(!opcion.equals("4"));
+		
 	}	
 
 }
+
+
+
+
+
