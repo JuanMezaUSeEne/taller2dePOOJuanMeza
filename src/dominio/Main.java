@@ -22,13 +22,8 @@ public class Main  {
 		//for (int i = 0; i<aux; i++) {
 		//	System.out.println(amigos[i].getNombre()); //probando si el algoritmo creo y almaceno los nombres de las instancias de amigos
 		//}
-		File arch2 = new File("C:/Users/Juan/Documents/taller 2/registro manual/Consumido.txt");//SEGUNDO ARCHIVO CON LOS REGISTROS DE LOS CHORIPANES Y TERREMOTOS
-		Scanner lectura2 = new Scanner(arch2);
-		String linea2 = lectura2.nextLine();
-		while (lectura2.hasNextLine()) {
-			System.out.println(linea2);
-			linea2 = lectura2.nextLine(); //prueba para ver si lee bien los datos del archivo
-		}
+		
+		
 		
 		
 		String opcion;
@@ -55,7 +50,27 @@ public class Main  {
 			if(opcion.equals("1")) {
 				
 				System.out.println();
-				System.out.println("se escogio 1");
+				
+				System.out.print("aqui se ve si es choripan o terremoto");
+				opcion = key.nextLine();
+				
+				File arch2 = new File("C:/Users/Juan/Documents/taller 2/registro manual/Consumido.txt");//SEGUNDO ARCHIVO CON LOS REGISTROS DE LOS CHORIPANES Y TERREMOTOS
+				Scanner lectura2 = new Scanner(arch2);
+				String linea2 = lectura2.nextLine();
+				String[] partes = linea2.split(";");
+				while (lectura2.hasNextLine()) {
+					
+					linea2 = lectura2.nextLine(); 
+					partes = linea2.split(";");
+					if(opcion.equals("1")) {
+						if(partes[0].equals("Choripan")) {
+							
+							System.out.println(partes[0] + partes[1] + " "+ partes[4]);
+						}
+					}
+					
+					
+				}//ingreso de datos de completos y terremotos comidos
 				System.out.println();
 				
 			}else if (opcion.equals("2")) {
@@ -87,6 +102,9 @@ public class Main  {
 	}	
 
 }
+
+
+
 
 
 
