@@ -22,20 +22,21 @@ public class Main  {
 		String linea = lectura.nextLine(); 
 		persona[] amigos = new persona[200];
 		int aux = 0;
+		amigos[aux] = new persona(linea);
+		
 		while (lectura.hasNextLine()) {
-			amigos[aux] = new persona(linea);
+			aux++;
 			linea = lectura.nextLine(); 
+			amigos[aux] = new persona(linea);
+			
+			
 			
 		}//algoritmo para crear instancia de los amigos y almacenarlos en un vector
 		
 		
+
 		
-		choripan pruebaChoripan = new choripan("nose", 1, 1);
-		
-		amigos[0].setChoripanes(pruebaChoripan, 0);
-		
-		System.out.println("aqui deberia haber un choripan"+ amigos[0].getChoripanes(0).getFecha());
-		
+		//System.out.println("aqui deberia haber un choripan"+ amigos[0].getChoripanes(0).getFecha());
 		
 		
 		
@@ -53,17 +54,60 @@ public class Main  {
 		File arch2 = new File(ruta2);//SEGUNDO ARCHIVO CON LOS REGISTROS DE LOS CHORIPANES Y TERREMOTOS
 		Scanner lectura2 = new Scanner(arch2);
 		String linea2 = lectura2.nextLine();
-		aux = 1;
+		String[] partes = linea2.split(";");
+		
+		String tipo ;
+		String nombre;
+		String valor1;
+		
+		int ancho;
+		int largo;
+		
+		
+		
+		aux = 0;
+		int index;
+		
+		
 		while (lectura2.hasNextLine()) {
+			if(partes.length == 4 || partes.length == 5 ) {
+				tipo = partes[0];
+				nombre = partes[1];
+				valor1 = partes[2];
+				
+				if(tipo.equals("Choripan")) {
+					largo = Integer.valueOf(valor1);
+					ancho = Integer.valueOf(partes[3]);
+					choripan pruebaChoripan = new choripan(partes[4],largo ,ancho);
+					//index va a ser el indice para ubicar en que parte de la lista amigos se encuentra la persona actual
+					index = buscarNombre(nombre, amigos);
+					amigos[index].setChoripanes(pruebaChoripan, amigos[index].getIndexContadorChoripanTerremoto(0));
+					amigos[index].sumarChoripanTerremoto(0);
+					System.out.println(amigos[0].getNombre()+ " lleva "+ amigos[index].getIndexContadorChoripanTerremoto(0)+ " choripanes");
+					
+				}else if((tipo.equals("Terremoto"))){
+					
+					
+				}
+			}
 			aux++;
 			linea2 = lectura2.nextLine();
+			partes = linea2.split(";");
+			
+			
+			System.out.println(aux);
+			
+			
 		}
 		
-		
+		System.out.println(amigos[1].getNombre()+ " se comio "+ amigos[1].getIndexContadorChoripanTerremoto(0)+ " choripanes");
 		String opcion;
-		int valorRegistros = aux;
+		int valorRegistros = aux+1;
 		
 		
+		
+		
+		//la interfaz de usuario
 		do {
 			Scanner key = new Scanner(System.in); //lectura de teclado
 			System.out.println("==============================");
@@ -82,35 +126,16 @@ public class Main  {
 			
 			
 			if(opcion.equals("1")) {
-				aux = 0;
-				//aqui se inicia denuevo el proceso de lectura
-				
+				System.out.println();
+				System.out.println("se escogio 1");
 				System.out.println();
 				
-				System.out.print("aqui se ve si es choripan o terremoto");
-				opcion = key.nextLine();
+				System.out.println("estas son las kcal "+amigos[0].getChoripanes(0).getKcal());							
 				
-				arch2 = new File(ruta2);//SEGUNDO ARCHIVO CON LOS REGISTROS DE LOS CHORIPANES Y TERREMOTOS
-				lectura2 = new Scanner(arch2);
-				linea2 = lectura2.nextLine();
-				String[] partes = linea2.split(";");
-				while (lectura2.hasNextLine()) {
-					
-					linea2 = lectura2.nextLine(); 
-					partes = linea2.split(";");
-					if(opcion.equals("1")) {
-						if(partes[0].equals("Choripan")) {
-							aux++;
-							System.out.println(linea2);
-							System.out.println(partes[0] + partes[1] + " "+ partes[4]);
-							
-						}
-					}
 					
 					
-				}//ingreso de datos de completos y terremotos comidos
-				System.out.println("choripanes comidos"+ aux);
-				System.out.println();
+					
+
 				
 			}else if (opcion.equals("2")) {
 				
@@ -140,4 +165,20 @@ public class Main  {
 		
 	}	
 
+	
+	
+	
+	//una funcion para buscar el indice del nombre del participante en el vector amigos[]
+	public static int buscarNombre( String objetivo, persona[] lista) {
+		
+		int a = 0;
+		for(a = 0; a<200; a++) {
+			System.out.println(lista[a].getNombre()+ " "+ a);
+			if(lista[a].getNombre().equals(objetivo)) {
+				break;
+			}
+		}
+		return a;
+	}
+	
 }

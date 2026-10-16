@@ -3,6 +3,7 @@ package dominio;
 public class persona {
 	private String nombre;
 	private choripan[] choripanes = new choripan[200];
+	private int[] contador_choripan_terremoto = new int[2];
 	public persona(String nombre) {
 		this.nombre = nombre;
 	}
@@ -20,4 +21,21 @@ public class persona {
 	}
 	
 	
+	
+	public void sumarChoripanTerremoto(int opcion){
+		if(opcion == 0) {
+			contador_choripan_terremoto[opcion]++;
+		}else {
+			contador_choripan_terremoto[1]++;
+		}
+	}
+	
+	
+	public int getIndexContadorChoripanTerremoto(int opcion){
+		if(opcion == 0) {
+			return contador_choripan_terremoto[0];
+		}else {
+			return contador_choripan_terremoto[1];
+		}
+	}	
 }
