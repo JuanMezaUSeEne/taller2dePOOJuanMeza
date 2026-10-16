@@ -16,9 +16,18 @@ public class Main  {
 			amigos[aux] = new persona(linea);
 			linea = lectura.nextLine(); 
 			aux++;
-		}
-		int opcion = 0;
+		}//algoritmo para crear instancia de los amigos y almacenarlos en un vector
+		
+		
+		//for (int i = 0; i<aux; i++) {
+		//	System.out.println(amigos[i].getNombre()); //probando si el algoritmo creo y almaceno los nombres de las instancias de amigos
+		//}
+		
+		
+		String opcion;
 		int valorRegistros = 0;
+		
+		
 		do {
 			Scanner key = new Scanner(System.in); //lectura de teclado
 			System.out.println("==============================");
@@ -33,17 +42,21 @@ public class Main  {
 			System.out.println("[4] Salir");
 			System.out.println("==============================");
 			System.out.print("Seleccione una opcion: ");
-			opcion = key.nextInt();
-			if(opcion == 1) {
+			opcion = key.nextLine();
+			if(opcion == "1") {
 				System.out.println("se escogio 1");
-			}else if (opcion == 2) {
+			}else if (opcion == "2") {
 				System.out.println("se escogio 2");
-			}else if (opcion == 3) {
+			}else if (opcion == "3") {
 				System.out.println("se escogio 3");
-			}else if (opcion == 4) {
+			}else if (opcion == "4") {
 				System.out.println("se escogio [4] Salir");
+			}else {
+				System.out.println();
+				System.out.println("opcion invalida, por favor ingrese de nuevo");
+				System.out.println();
 			}
-		}while(opcion != 4);
+		}while(opcion != "4");
 	}	
 
 }
