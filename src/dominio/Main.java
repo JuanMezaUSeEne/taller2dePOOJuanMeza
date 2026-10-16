@@ -1,4 +1,5 @@
-package logica;
+//Juan Meza - 21297106-5 - icci
+package dominio;
 
 import java.util.Scanner;
 import java.io.IOException;
@@ -6,15 +7,24 @@ import java.io.File;
 
 public class Main  {
 	public static void main (String[] args) throws IOException{
-		//File arch = new File();
-		//Scanner lectura = new Scanner(arch);
+		File arch = new File("C:/Users/Juan/Documents/taller 2/registro manual/Participantes.txt");
+		Scanner lectura = new Scanner(arch);
+		String linea = lectura.nextLine(); 
+		persona[] amigos = new persona[20];
+		int aux = 0;
+		while (lectura.hasNextLine()) {
+			amigos[aux] = new persona(linea);
+			linea = lectura.nextLine(); 
+			aux++;
+		}
 		int opcion = 0;
+		int valorRegistros = 0;
 		do {
-			Scanner key = new Scanner(System.in);
+			Scanner key = new Scanner(System.in); //lectura de teclado
 			System.out.println("==============================");
 			System.out.println("LA FONDA DEL PAPU");
 			System.out.println("==============================");
-			int valorRegistros = 0;
+			
 			System.out.println("Registros cargados: "+ valorRegistros);
 			System.out.println("-------------------------------");
 			System.out.println("[1] Ver registros");
