@@ -13,7 +13,7 @@ public class Main  {
 		//ruta1:la ruta del archivo de Participantes.txt
 		//ruta2: la ruta de los registros Consumidos.txt
 		String ruta1 = "C:/Users/Juan/Documents/taller 2/registro manual/Participantes.txt";
-		String ruta2 = "C:/Users/Juan/Documents/taller 2/registro manual/Consumido.txt";
+		String ruta2 = "C:/Users/Juan/Documents/taller 2/registro manual/Consumidoo.txt";
 		
 		
 		
@@ -213,8 +213,27 @@ public class Main  {
 				if(opcion.equals("1")){
 				    System.out.println("");
 				    System.out.println("=============== CHORIPANES =================");
-				    System.out.println("  #   Consumidor    Largo   Ancho   Fecha         KCal");
+				    System.out.println("  #   Consumidor    Largo    Ancho   Fecha         KCal");
+				    
+				    
 				    //aqui se muestra el registro
+				    int aux2= 1;
+				    float maxlitros=0;
+				    for(int i = 1; i<=valorRegistros; i++){//aqui se muestra el registro
+				        if(listaConsumo[i-1].getTipo().equals("Choripan")){
+				            //System.out.println("  " + aux2 + "   " + listaConsumo[i-1].getPersonaConsumo().getNombre() + "   " + listaConsumo[i-1].getDato1() + " L   " + listaConsumo[i-1].getFechaConsumo()+ "    "+ Math.round(listaConsumo[i-1].getKcals() * 100.0) / 100.0);
+				        	System.out.print("  "+ aux2);
+				        	mostrarOrdenadito(String.valueOf(aux2),listaConsumo[i-1].getPersonaConsumo().getNombre() , 1,4);
+				        	mostrarOrdenadito(listaConsumo[i-1].getPersonaConsumo().getNombre(),String.valueOf(listaConsumo[i-1].getDato1())+"  cm",1,14);
+				        	mostrarOrdenadito(String.valueOf(listaConsumo[i-1].getDato1())+" cm",String.valueOf(listaConsumo[i-1].getDato2())+" cm",1,8);
+				        	mostrarOrdenadito(String.valueOf(listaConsumo[i-1].getDato2()),listaConsumo[i-1].getFechaConsumo(),1 ,5);
+				        	mostrarOrdenadito(listaConsumo[i-1].getFechaConsumo(),String.valueOf(listaConsumo[i-1].getKcals()),0,14);
+				        	aux2++;
+				            maxlitros = maxlitros + listaConsumo[i-1].getDato1();
+				        }
+				    }
+				    
+				    
 				    System.out.println("--------------------------------------------------");
 				    System.out.println("  Total: "+ "(inserte cantidad de choripanes)" +" choripanes registrados");
 				    System.out.println("==================================================");
@@ -222,20 +241,31 @@ public class Main  {
 				    System.out.print("Presione ENTER para continuar...");
 				    opcion = key.nextLine();
 				    opcion = "";
+				    
+				    
 				}else if(opcion.equals("2")){
 				    System.out.println("");
 				    System.out.println("=============== TERREMOTOS =================");
 				    System.out.println("  #   Consumidor    Litros   Fecha         KCal");
+				    
+				    
+				    
 				    int aux2= 1;
+				    float maxlitros=0;
 				    for(int i = 1; i<=valorRegistros; i++){//aqui se muestra el registro
 				        if(listaConsumo[i-1].getTipo().equals("Terremoto")){
 				            //System.out.println("  " + aux2 + "   " + listaConsumo[i-1].getPersonaConsumo().getNombre() + "   " + listaConsumo[i-1].getDato1() + " L   " + listaConsumo[i-1].getFechaConsumo()+ "    "+ Math.round(listaConsumo[i-1].getKcals() * 100.0) / 100.0);
-				            mostrarOrdenadito(aux2, listaConsumo[i-1].getPersonaConsumo().getNombre());
+				        	System.out.print("  "+ aux2);
+				        	mostrarOrdenadito(String.valueOf(aux2), listaConsumo[i-1].getPersonaConsumo().getNombre(), 1, 4);
+				        	mostrarOrdenadito(listaConsumo[i-1].getPersonaConsumo().getNombre(), String.valueOf(listaConsumo[i-1].getDato1())+" LT", 1, 14);
+				        	mostrarOrdenadito(String.valueOf(listaConsumo[i-1].getDato1())+" LT",listaConsumo[i-1].getFechaConsumo() , 1,9  );
+				        	mostrarOrdenadito(listaConsumo[i-1].getFechaConsumo(),String.valueOf(listaConsumo[i-1].getKcals()) , 0,14  );
 				            aux2++;
+				            maxlitros = maxlitros + listaConsumo[i-1].getDato1();
 				        }
 				    }
 				    System.out.println("--------------------------------------------------");
-				    System.out.println("  Total:"+ "(inserte cantidad de terremotos)" +  " terremotos registrados "+ "(inserte cantidad de litros");
+				    System.out.println("  Total:"+ aux2 +  " terremotos registrados ("+ maxlitros+ " L)");
 				    System.out.println("==================================================");
 				    System.out.println("");
 				    System.out.print("Presione ENTER para continuar...");
@@ -289,18 +319,24 @@ public class Main  {
 		}
 		return a;
 	}
-	public static void mostrarOrdenadito(int aux, String nombre ){ //float dato1, float dato2, String fecha, float kcals 
-        System.out.print("  "+ aux);
-        for(int a = 0; a<3-((int)(Math.log10(aux)));a++){
+	public static void mostrarOrdenadito(String nombreAnterior, String nombre, int condicion, int numeroEspacios ){ //float dato1, float dato2, String fecha, float kcals 
+		int caracteres = nombreAnterior.length();
+        for(int a = 0; a<numeroEspacios-caracteres;a++){
             
             System.out.print(" ");
             
         }
-        System.out.println(nombre+"    este es la funcion");
-        
+if(condicion == 1){
+        System.out.print(nombre);
+}else{
+System.out.println(nombre);
+}        
+
+
     }
 	
 }
+
 
 
 
