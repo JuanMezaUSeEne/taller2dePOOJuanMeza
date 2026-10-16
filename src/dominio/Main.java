@@ -7,16 +7,41 @@ import java.io.File;
 
 public class Main  {
 	public static void main (String[] args) throws IOException{
-		File arch = new File("C:/Users/Juan/Documents/taller 2/registro manual/Participantes.txt"); //el archivo de las personas que participan
+		
+		
+		//RUTAS: son variables que se usan para determinar la ruta de los archivos que se leeran, asi cuando esten probando con distintas entradas solo tengan que cambiar la ruta en estas 2 variables
+		//ruta1:la ruta del archivo de Participantes.txt
+		//ruta2: la ruta de los registros Consumidos.txt
+		String ruta1 = "C:/Users/Juan/Documents/taller 2/registro manual/Participantes.txt";
+		String ruta2 = "C:/Users/Juan/Documents/taller 2/registro manual/Consumido.txt";
+		
+		
+		
+		File arch = new File(ruta1); //el archivo de las personas que participan
 		Scanner lectura = new Scanner(arch);
 		String linea = lectura.nextLine(); 
-		persona[] amigos = new persona[20];
+		persona[] amigos = new persona[200];
 		int aux = 0;
 		while (lectura.hasNextLine()) {
 			amigos[aux] = new persona(linea);
 			linea = lectura.nextLine(); 
-			aux++;
+			
 		}//algoritmo para crear instancia de los amigos y almacenarlos en un vector
+		
+		
+		
+		choripan pruebaChoripan = new choripan("nose", 1, 1);
+		
+		amigos[0].setChoripanes(pruebaChoripan, 0);
+		
+		System.out.println("aqui deberia haber un choripan"+ amigos[0].getChoripanes(0).getFecha());
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		//for (int i = 0; i<aux; i++) {
@@ -24,10 +49,19 @@ public class Main  {
 		//}
 		
 		
+		//aqui se leen los registros por primera vez para tener los registros cargados
+		File arch2 = new File(ruta2);//SEGUNDO ARCHIVO CON LOS REGISTROS DE LOS CHORIPANES Y TERREMOTOS
+		Scanner lectura2 = new Scanner(arch2);
+		String linea2 = lectura2.nextLine();
+		aux = 1;
+		while (lectura2.hasNextLine()) {
+			aux++;
+			linea2 = lectura2.nextLine();
+		}
 		
 		
 		String opcion;
-		int valorRegistros = 0;
+		int valorRegistros = aux;
 		
 		
 		do {
@@ -48,15 +82,17 @@ public class Main  {
 			
 			
 			if(opcion.equals("1")) {
+				aux = 0;
+				//aqui se inicia denuevo el proceso de lectura
 				
 				System.out.println();
 				
 				System.out.print("aqui se ve si es choripan o terremoto");
 				opcion = key.nextLine();
 				
-				File arch2 = new File("C:/Users/Juan/Documents/taller 2/registro manual/Consumido.txt");//SEGUNDO ARCHIVO CON LOS REGISTROS DE LOS CHORIPANES Y TERREMOTOS
-				Scanner lectura2 = new Scanner(arch2);
-				String linea2 = lectura2.nextLine();
+				arch2 = new File(ruta2);//SEGUNDO ARCHIVO CON LOS REGISTROS DE LOS CHORIPANES Y TERREMOTOS
+				lectura2 = new Scanner(arch2);
+				linea2 = lectura2.nextLine();
 				String[] partes = linea2.split(";");
 				while (lectura2.hasNextLine()) {
 					
@@ -64,13 +100,16 @@ public class Main  {
 					partes = linea2.split(";");
 					if(opcion.equals("1")) {
 						if(partes[0].equals("Choripan")) {
-							
+							aux++;
+							System.out.println(linea2);
 							System.out.println(partes[0] + partes[1] + " "+ partes[4]);
+							
 						}
 					}
 					
 					
 				}//ingreso de datos de completos y terremotos comidos
+				System.out.println("choripanes comidos"+ aux);
 				System.out.println();
 				
 			}else if (opcion.equals("2")) {
@@ -102,11 +141,3 @@ public class Main  {
 	}	
 
 }
-
-
-
-
-
-
-
-

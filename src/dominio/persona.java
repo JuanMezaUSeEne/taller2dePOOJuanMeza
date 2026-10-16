@@ -2,7 +2,7 @@ package dominio;
 
 public class persona {
 	private String nombre;
-	private choripan choripanes;
+	private choripan[] choripanes = new choripan[200];
 	public persona(String nombre) {
 		this.nombre = nombre;
 	}
@@ -12,11 +12,11 @@ public class persona {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public choripan getChoripanes() {
-		return choripanes;
+	public choripan getChoripanes(int aux) {
+		return choripanes[aux];
 	}
-	public void setChoripanes(choripan choripanes) {
-		this.choripanes = choripanes;
+	public void setChoripanes(choripan choripanes, int aux) {
+		this.choripanes[aux] = choripanes;
 	}
 	
 	
