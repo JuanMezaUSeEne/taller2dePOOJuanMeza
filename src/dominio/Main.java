@@ -21,6 +21,8 @@ public class Main  {
 		Scanner lectura = new Scanner(arch);
 		String linea = lectura.nextLine(); 
 		persona[] amigos = new persona[200];
+		Consumidos[] listaConsumo = new Consumidos[200];
+		
 		int aux = 0;
 		if(!linea.equals("")){
 		    amigos[aux] = new persona(linea);
@@ -60,9 +62,10 @@ public class Main  {
 		String tipo ;
 		String nombre;
 		String valor1;
+		String fechaAux;
 		
 		int ancho;
-		int largo;
+		float largo = 0;
 		
 		
 		
@@ -78,30 +81,43 @@ public class Main  {
 				valor1 = partes[2];
 				
 				if(tipo.equals("Choripan")) {
-					largo = Integer.valueOf(valor1);
+				    fechaAux = partes[4];
+					largo = Float.valueOf(valor1);
 					ancho = Integer.valueOf(partes[3]);
-					choripan pruebaChoripan = new choripan(partes[4],largo ,ancho, aux+1);
+					choripan pruebaChoripan = new choripan(fechaAux,largo ,ancho, aux+1);
 					//index va a ser el indice para ubicar en que parte de la lista amigos se encuentra la persona actual
 					index = buscarNombre(nombre, amigos);
 					amigos[index].setChoripanes(pruebaChoripan, amigos[index].getIndexContadorChoripanTerremoto(0));
 					amigos[index].sumarChoripanTerremoto(0);
 					System.out.println(amigos[0].getNombre()+ " lleva "+ amigos[index].getIndexContadorChoripanTerremoto(0)+ " choripanes");
+					listaConsumo[aux] = new Consumidos(amigos[index], partes[0],largo , ancho, fechaAux);
+					
 					
 				}else if((tipo.equals("Terremoto"))){
-				    float LT = Float.valueOf(valor1);
-				    Terremotos elterremoto = new Terremotos(LT, partes[3], aux+1);
+				    fechaAux = partes[3];
+				    largo = Float.valueOf(valor1);
+				    
+				    Terremotos elterremoto = new Terremotos(largo, fechaAux, aux+1);
 					index = buscarNombre(nombre, amigos);
 					amigos[index].setTerremotos(elterremoto, amigos[index].getIndexContadorChoripanTerremoto(1));
 					amigos[index].sumarChoripanTerremoto(1);
 					System.out.println(amigos[0].getNombre()+ " lleva "+ amigos[index].getIndexContadorChoripanTerremoto(1)+ " terremotos");
+					ancho = 0;
+					listaConsumo[aux] = new Consumidos(amigos[index], partes[0],largo , ancho, fechaAux);
 				}
+				
+				
 			}
+			
+			
+			
 			aux++;
+			
 			linea2 = lectura2.nextLine();
 			partes = linea2.split(";");
 			
 			
-			System.out.println(aux);
+			
 			
 			
 		}//aqui termina el while donde se ingresan los datos
@@ -109,33 +125,44 @@ public class Main  {
 		
 		
 		//inicia el if para ingresar los datos de la ultima linea que no se ingresaron dentro del while
+		System.out.println(linea2);
 		if(partes.length == 4 || partes.length == 5 ) {
 				tipo = partes[0];
 				nombre = partes[1];
 				valor1 = partes[2];
 				
 				if(tipo.equals("Choripan")) {
-					largo = Integer.valueOf(valor1);
+				    fechaAux = partes[4];
+					largo = Float.valueOf(valor1);
 					ancho = Integer.valueOf(partes[3]);
-					choripan pruebaChoripan = new choripan(partes[4],largo ,ancho, aux+1);
+					choripan pruebaChoripan = new choripan(fechaAux,largo ,ancho, aux+1);
 					//index va a ser el indice para ubicar en que parte de la lista amigos se encuentra la persona actual
 					index = buscarNombre(nombre, amigos);
 					amigos[index].setChoripanes(pruebaChoripan, amigos[index].getIndexContadorChoripanTerremoto(0));
 					amigos[index].sumarChoripanTerremoto(0);
 					System.out.println(amigos[0].getNombre()+ " lleva "+ amigos[index].getIndexContadorChoripanTerremoto(0)+ " choripanes");
+					listaConsumo[aux] = new Consumidos(amigos[index], partes[0],largo , ancho, fechaAux);
+					
 					
 				}else if((tipo.equals("Terremoto"))){
-				    float LT = Float.valueOf(valor1);
-				    Terremotos elterremoto = new Terremotos(LT, partes[3], aux+1);
+				    fechaAux = partes[3];
+				    largo = Float.valueOf(valor1);
+				    
+				    Terremotos elterremoto = new Terremotos(largo, fechaAux, aux+1);
 					index = buscarNombre(nombre, amigos);
 					amigos[index].setTerremotos(elterremoto, amigos[index].getIndexContadorChoripanTerremoto(1));
 					amigos[index].sumarChoripanTerremoto(1);
 					System.out.println(amigos[0].getNombre()+ " lleva "+ amigos[index].getIndexContadorChoripanTerremoto(1)+ " terremotos");
+					ancho = 0;
+					listaConsumo[aux] = new Consumidos(amigos[index], partes[0],largo , ancho, fechaAux);
 				}
-			}// termina el if
+				
+				
+			}
 		
 		
 		
+		// termina el if
 		
 		
 		
@@ -260,3 +287,5 @@ public class Main  {
 	}
 	
 }
+
+

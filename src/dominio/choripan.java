@@ -2,21 +2,21 @@ package dominio;
 
 public class choripan {
 	private String fecha;
-	private int largo;
+	private float largo;
 	private int ancho;
 	private float kcal;
 	private int contador;
-	public choripan(String fecha, int largo, int ancho, int contador ) {
+	public choripan(String fecha, float largo, int ancho, int contador ) {
 		this.fecha = fecha;
 		this.largo = largo;
 		this.ancho = ancho;
 		this.kcal = (largo* ancho) / 3;
 		this.contador = contador;
 	}
-	public int getLargo() {
+	public float getLargo() {
 		return largo;
 	}
-	public void setLargo(int largo) {
+	public void setLargo(float largo) {
 		this.largo = largo;
 	}
 	public int getAncho() {
