@@ -191,7 +191,7 @@ public class Main  {
 			opcion = key.nextLine();
 			
 			
-			if(opcion.equals("1")) {
+			if(opcion.equals("1")) {//OPCION 1 DEL MENU
 			    do{
 			        System.out.println("");
 			        
@@ -205,7 +205,7 @@ public class Main  {
     				if(!(opcion.equals("1") || opcion.equals("2") || opcion.equals("3"))){
     				    System.out.println("mensaje de error no se ingreso una  opcion valida, intentar de nuevo");
     				}
-			    }while(!(opcion.equals("1") || opcion.equals("2")));
+			    }while(!(opcion.equals("1") || opcion.equals("2") || opcion.equals("3")));
 			    
 				System.out.println("estas son las kcal "+amigos[0].getChoripanes(0).getKcal());							
 				System.out.println("");
@@ -226,9 +226,13 @@ public class Main  {
 				    System.out.println("");
 				    System.out.println("=============== TERREMOTOS =================");
 				    System.out.println("  #   Consumidor    Litros   Fecha         KCal");
+				    int aux2= 1;
 				    for(int i = 1; i<=valorRegistros; i++){//aqui se muestra el registro
-				        
-				        System.out.println("  "+i+"   " +amigos[0].getNombre()  );
+				        if(listaConsumo[i-1].getTipo().equals("Terremoto")){
+				            //System.out.println("  " + aux2 + "   " + listaConsumo[i-1].getPersonaConsumo().getNombre() + "   " + listaConsumo[i-1].getDato1() + " L   " + listaConsumo[i-1].getFechaConsumo()+ "    "+ Math.round(listaConsumo[i-1].getKcals() * 100.0) / 100.0);
+				            mostrarOrdenadito(aux2, listaConsumo[i-1].getPersonaConsumo().getNombre());
+				            aux2++;
+				        }
 				    }
 				    System.out.println("--------------------------------------------------");
 				    System.out.println("  Total:"+ "(inserte cantidad de terremotos)" +  " terremotos registrados "+ "(inserte cantidad de litros");
@@ -285,7 +289,18 @@ public class Main  {
 		}
 		return a;
 	}
+	public static void mostrarOrdenadito(int aux, String nombre ){ //float dato1, float dato2, String fecha, float kcals 
+        System.out.print("  "+ aux);
+        for(int a = 0; a<3-((int)(Math.log10(aux)));a++){
+            
+            System.out.print(" ");
+            
+        }
+        System.out.println(nombre+"    este es la funcion");
+        
+    }
 	
 }
+
 
 
