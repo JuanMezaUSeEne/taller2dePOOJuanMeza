@@ -4,6 +4,7 @@ package dominio;
 import java.util.Scanner;
 import java.io.IOException;
 import java.io.File;
+import java.io.FileWriter;
 
 public class Main  {
 	public static void main (String[] args) throws IOException{
@@ -15,7 +16,7 @@ public class Main  {
 		String ruta1 = "C:/Users/Juan/Documents/taller 2/registro manual/Participantes.txt";
 		String ruta2 = "C:/Users/Juan/Documents/taller 2/registro manual/Consumidoo.txt";
 		
-		
+		String opcion;
 		
 		File arch = new File(ruta1); //el archivo de las personas que participan
 		Scanner lectura = new Scanner(arch);
@@ -23,14 +24,14 @@ public class Main  {
 		persona[] amigos = new persona[200];
 		Consumidos[] listaConsumo = new Consumidos[200];
 		
-		int aux = 0;
+		int aux1 = 0;
 		if(!linea.equals("")){
-		    amigos[aux] = new persona(linea);
+		    amigos[aux1] = new persona(linea);
 		}
 		while (lectura.hasNextLine()) {
-			aux++;
+			aux1++;
 			linea = lectura.nextLine(); 
-			amigos[aux] = new persona(linea);
+			amigos[aux1] = new persona(linea);
 			
 			
 			
@@ -54,6 +55,7 @@ public class Main  {
 		
 		
 		//aqui se leen los registros por primera vez para tener los registros cargados
+do {			
 		File arch2 = new File(ruta2);//SEGUNDO ARCHIVO CON LOS REGISTROS DE LOS CHORIPANES Y TERREMOTOS
 		Scanner lectura2 = new Scanner(arch2);
 		String linea2 = lectura2.nextLine();
@@ -66,11 +68,12 @@ public class Main  {
 		
 		int ancho;
 		float largo = 0;
-		
-		
-		
-		aux = 0;
 		int index;
+		
+		
+	
+		int aux = 0;
+		
 		
 		//aqui se inicia el while donde se ingresan los datos
 		while (lectura2.hasNextLine()) {
@@ -167,14 +170,14 @@ public class Main  {
 		
 		
 		System.out.println(amigos[0].getNombre()+ " se comio "+ amigos[0].getIndexContadorChoripanTerremoto(0)+ " choripanes y "+ amigos[0].getIndexContadorChoripanTerremoto(1)+ " terremotos");
-		String opcion;
+		
 		int valorRegistros = aux+1;
 		
 		
 		
 		
 		//la interfaz de usuario
-		do {
+		
 			Scanner key = new Scanner(System.in); //lectura de teclado
 			System.out.println("==============================");
 			System.out.println("LA FONDA DEL PAPU");
@@ -207,7 +210,7 @@ public class Main  {
     				}
 			    }while(!(opcion.equals("1") || opcion.equals("2") || opcion.equals("3")));
 			    
-				System.out.println("estas son las kcal "+amigos[0].getChoripanes(0).getKcal());							
+										
 				System.out.println("");
 				
 				if(opcion.equals("1")){
@@ -235,7 +238,7 @@ public class Main  {
 				    
 				    
 				    System.out.println("--------------------------------------------------");
-				    System.out.println("  Total: "+ "(inserte cantidad de choripanes)" +" choripanes registrados");
+				    System.out.println("  Total: "+ aux2 +" choripanes registrados");
 				    System.out.println("==================================================");
 				    System.out.println("");
 				    System.out.print("Presione ENTER para continuar...");
@@ -276,12 +279,94 @@ public class Main  {
 					
 
 				
-			}else if (opcion.equals("2")) {
+			}else if (opcion.equals("2")) {//ACTUALIZAR REGISTROS
 				
-				System.out.println();
-				System.out.println("se escogio 2");
-				System.out.println();
+				do {
+					System.out.println();
+					System.out.println("========== ACTUALIZAR REGISTROS ============");
+					System.out.println("  [1] Agregar");
+					System.out.println("  [2] Editar");
+					System.out.println("  [3] Eliminar");
+					System.out.println("  [4] Volver al menu principal");
+					System.out.println("============================================");
+					System.out.print("Seleccione una opcion: ");
+					opcion = key.nextLine();
+					if(!(opcion.equals("1") || opcion.equals("2") || opcion.equals("3"))){
+					    System.out.println("mensaje de error no se ingreso una  opcion valida, intentar de nuevo");
+					}
+				}while(!(opcion.equals("1") || opcion.equals("2") || opcion.equals("3")|| opcion.equals("4")));
 				
+				if(opcion.equals("1")) {//AGREGAR
+					
+					while(!opcion.equals("3")){
+						System.out.println("");
+						System.out.println("Tipo de registro:");
+						System.out.println("  [1] Choripan");
+						System.out.println("  [2] Terremoto");
+						System.out.println("  [3] Camcelar");
+						System.out.print("Seleccione una opcion: ");
+						opcion = key.nextLine();
+						
+						//AÑADIR CHORIPAN
+						
+						if(opcion.equals("1")) {
+							
+							boolean comprobador = false;
+							int i = 0;
+							do {
+								System.out.println("");
+								System.out.println("Consumidores disponibles:");
+								for( i = 0; i<aux1;i++) {
+									System.out.println("["+(i+1)+"] "+amigos[i].getNombre());
+								}
+								System.out.print("seleccione el consumidor");
+								
+								
+								
+								opcion = key.nextLine();
+								for( i = 0; i<aux1;i++) {
+									if(opcion.equals(String.valueOf(i))){
+										comprobador = true;
+										break;
+									}
+								}
+								if(comprobador == false) {
+									System.out.println("opcion invalida, intente de nuevo");
+								}
+							}while(comprobador == false);
+							
+							System.out.println("Largo del choripan (cm): ");
+							int medidas = key.nextInt();
+							System.out.println("Ancho del choripan (cm): ");
+							medidas = key.nextInt();
+							do {
+								System.out.println("Fecha (YYYY-MM-DD): ");
+								opcion = key.nextLine();
+								if(opcion.split("-").length !=3) {
+									System.out.println("fecha invalida, intende de nuevo");
+								}
+							}while(opcion.split("-").length !=3);
+							
+						//AÑADIR TERREMOTO
+							
+						}else if(opcion.equals("2")) {
+							
+						}else if(opcion.equals("3")) {
+							
+						}else {
+							System.out.println("opcion no valida, intente de nuevo");
+						}
+						
+					}
+					
+				}else if(opcion.equals("2")) {
+					
+					System.out.println("se escogio 2");
+					
+				}else if(opcion.equals("3")) {
+					System.out.println("se escogio 3");
+				}
+				System.out.println("saliendo...");
 			}else if (opcion.equals("3")) {
 				
 				System.out.println();
@@ -300,11 +385,12 @@ public class Main  {
 				System.out.println();
 			}
 
-		}while(!opcion.equals("4"));
+			
 		
-	}	
+		
 
-	
+}while(!opcion.equals("4"));
+}	
 	
 	
 	//una funcion para buscar el indice del nombre del participante en el vector amigos[]
