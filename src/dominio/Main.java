@@ -46,7 +46,7 @@ public class Main  {
 		
 		
 		int aux = 0;
-		int valorRegistros = 0;
+		
 		
 		
 		
@@ -71,7 +71,7 @@ public class Main  {
 		float largo = 0;
 		int index;
 		aux = 0;
-		
+		int valorRegistros = 0;
 	
 		
 		
@@ -314,6 +314,7 @@ public class Main  {
 						//AÑADIR CHORIPAN O TERREMOTO
 						
 						if(opcion.equals("1") ||opcion.equals("2")) {
+							String eltipo;
 							String ch_te = opcion;
 							boolean comprobador = false;
 							int i = 0;
@@ -339,11 +340,13 @@ public class Main  {
 								}
 							}while(comprobador == false);
 							if(ch_te.equals("1")) {
+								 eltipo= "Choripan";
 								System.out.print("Largo del choripan (cm): ");
 								largo = key.nextInt();
 								System.out.print("Ancho del choripan (cm): ");
 								ancho = key.nextInt();
 							}else {
+								eltipo = "Terremoto";
 								System.out.print("litros del terremoto: ");
 								largo = key.nextFloat();
 								ancho = 0;
@@ -359,11 +362,11 @@ public class Main  {
 							if(valorRegistros >= 200) {
 								System.out.println("ERROR NO HAY MAS ESPACIO PARA REGISTROS, INTENTE ELIMINAR");
 							} else{
-								valorRegistros = 1;
-								listaConsumo[aux] = new Consumidos(amigos[i], "Choripan",largo , ancho, opcion);
+								
+								listaConsumo[aux] = new Consumidos(amigos[i], eltipo,largo , ancho, opcion);
 								try (BufferedWriter escribir = new BufferedWriter(new FileWriter(ruta2, true))){
 									escribir.newLine();
-									escribir.write("hola");
+									escribir.write(listaConsumo[aux].escribirRegistro(ch_te));
 									System.out.println("registro añadido con exito");
 									
 								}catch(IOException e) {
@@ -385,7 +388,7 @@ public class Main  {
 					
 				}else if(opcion.equals("2")) {
 					
-					System.out.println("se escogio 2");
+					System.out.println("no alcance a editar registros DX");
 				//ELIMINAR REGISTRO
 				}else if(opcion.equals("3")) {
 					opcion = "";
@@ -399,11 +402,11 @@ public class Main  {
 						break;
 					}
 					opcion = key.nextLine();
-				System.out.println("saliendo...");
+				System.out.println("sno alcance a borrar registros DX");
 			}else if (opcion.equals("3")) {
 				
 				System.out.println();
-				System.out.println("se escogio 3");
+				System.out.println("no alcance a hacer las metricas DX");
 				System.out.println();
 				
 			}else if (opcion.equals("4")) {
