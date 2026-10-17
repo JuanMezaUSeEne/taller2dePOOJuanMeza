@@ -39,4 +39,10 @@ public class Consumidos{
     public float getKcals(){
         return kcals;
     }
+    public String escribirRegistro(int choripanOterremoto) {
+    	if (choripanOterremoto ==1) {
+    		return (tipo+ ) 
+    	}
+    }
 }
+

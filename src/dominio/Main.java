@@ -5,6 +5,7 @@ import java.util.Scanner;
 import java.io.IOException;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.BufferedWriter;
 
 public class Main  {
 	public static void main (String[] args) throws IOException{
@@ -44,8 +45,8 @@ public class Main  {
 		
 		
 		
-		
-		
+		int aux = 0;
+		int valorRegistros = 0;
 		
 		
 		
@@ -55,7 +56,7 @@ public class Main  {
 		
 		
 		//aqui se leen los registros por primera vez para tener los registros cargados
-do {			
+		do {			
 		File arch2 = new File(ruta2);//SEGUNDO ARCHIVO CON LOS REGISTROS DE LOS CHORIPANES Y TERREMOTOS
 		Scanner lectura2 = new Scanner(arch2);
 		String linea2 = lectura2.nextLine();
@@ -69,15 +70,15 @@ do {
 		int ancho;
 		float largo = 0;
 		int index;
-		
+		aux = 0;
 		
 	
-		int aux = 0;
+		
 		
 		
 		//aqui se inicia el while donde se ingresan los datos
 		while (lectura2.hasNextLine()) {
-		    System.out.println(linea2);
+		    //System.out.println(linea2);
 			if(partes.length == 4 || partes.length == 5 ) {
 				tipo = partes[0];
 				nombre = partes[1];
@@ -92,7 +93,7 @@ do {
 					index = buscarNombre(nombre, amigos);
 					amigos[index].setChoripanes(pruebaChoripan, amigos[index].getIndexContadorChoripanTerremoto(0));
 					amigos[index].sumarChoripanTerremoto(0);
-					System.out.println(amigos[0].getNombre()+ " lleva "+ amigos[index].getIndexContadorChoripanTerremoto(0)+ " choripanes");
+					//System.out.println(amigos[0].getNombre()+ " lleva "+ amigos[index].getIndexContadorChoripanTerremoto(0)+ " choripanes");
 					listaConsumo[aux] = new Consumidos(amigos[index], partes[0],largo , ancho, fechaAux);
 					
 					
@@ -104,7 +105,7 @@ do {
 					index = buscarNombre(nombre, amigos);
 					amigos[index].setTerremotos(elterremoto, amigos[index].getIndexContadorChoripanTerremoto(1));
 					amigos[index].sumarChoripanTerremoto(1);
-					System.out.println(amigos[0].getNombre()+ " lleva "+ amigos[index].getIndexContadorChoripanTerremoto(1)+ " terremotos");
+					//System.out.println(amigos[0].getNombre()+ " lleva "+ amigos[index].getIndexContadorChoripanTerremoto(1)+ " terremotos");
 					ancho = 0;
 					listaConsumo[aux] = new Consumidos(amigos[index], partes[0],largo , ancho, fechaAux);
 				}
@@ -128,7 +129,8 @@ do {
 		
 		
 		//inicia el if para ingresar los datos de la ultima linea que no se ingresaron dentro del while
-		System.out.println(linea2);
+		
+		//System.out.println(linea2);
 		if(partes.length == 4 || partes.length == 5 ) {
 				tipo = partes[0];
 				nombre = partes[1];
@@ -139,11 +141,13 @@ do {
 					largo = Float.valueOf(valor1);
 					ancho = Integer.valueOf(partes[3]);
 					choripan pruebaChoripan = new choripan(fechaAux,largo ,ancho, aux+1);
+					
 					//index va a ser el indice para ubicar en que parte de la lista amigos se encuentra la persona actual
+					
 					index = buscarNombre(nombre, amigos);
 					amigos[index].setChoripanes(pruebaChoripan, amigos[index].getIndexContadorChoripanTerremoto(0));
 					amigos[index].sumarChoripanTerremoto(0);
-					System.out.println(amigos[0].getNombre()+ " lleva "+ amigos[index].getIndexContadorChoripanTerremoto(0)+ " choripanes");
+					//System.out.println(amigos[0].getNombre()+ " lleva "+ amigos[index].getIndexContadorChoripanTerremoto(0)+ " choripanes");
 					listaConsumo[aux] = new Consumidos(amigos[index], partes[0],largo , ancho, fechaAux);
 					
 					
@@ -155,7 +159,7 @@ do {
 					index = buscarNombre(nombre, amigos);
 					amigos[index].setTerremotos(elterremoto, amigos[index].getIndexContadorChoripanTerremoto(1));
 					amigos[index].sumarChoripanTerremoto(1);
-					System.out.println(amigos[0].getNombre()+ " lleva "+ amigos[index].getIndexContadorChoripanTerremoto(1)+ " terremotos");
+					//System.out.println(amigos[0].getNombre()+ " lleva "+ amigos[index].getIndexContadorChoripanTerremoto(1)+ " terremotos");
 					ancho = 0;
 					listaConsumo[aux] = new Consumidos(amigos[index], partes[0],largo , ancho, fechaAux);
 				}
@@ -169,9 +173,9 @@ do {
 		
 		
 		
-		System.out.println(amigos[0].getNombre()+ " se comio "+ amigos[0].getIndexContadorChoripanTerremoto(0)+ " choripanes y "+ amigos[0].getIndexContadorChoripanTerremoto(1)+ " terremotos");
+		//System.out.println(amigos[0].getNombre()+ " se comio "+ amigos[0].getIndexContadorChoripanTerremoto(0)+ " choripanes y "+ amigos[0].getIndexContadorChoripanTerremoto(1)+ " terremotos");
 		
-		int valorRegistros = aux+1;
+		valorRegistros += aux+1;
 		
 		
 		
@@ -307,10 +311,10 @@ do {
 						System.out.print("Seleccione una opcion: ");
 						opcion = key.nextLine();
 						
-						//AÑADIR CHORIPAN
+						//AÑADIR CHORIPAN O TERREMOTO
 						
-						if(opcion.equals("1")) {
-							
+						if(opcion.equals("1") ||opcion.equals("2")) {
+							String ch_te = opcion;
 							boolean comprobador = false;
 							int i = 0;
 							do {
@@ -334,11 +338,16 @@ do {
 									System.out.println("opcion invalida, intente de nuevo");
 								}
 							}while(comprobador == false);
-							
-							System.out.println("Largo del choripan (cm): ");
-							int medidas = key.nextInt();
-							System.out.println("Ancho del choripan (cm): ");
-							medidas = key.nextInt();
+							if(ch_te.equals("1")) {
+								System.out.print("Largo del choripan (cm): ");
+								largo = key.nextInt();
+								System.out.print("Ancho del choripan (cm): ");
+								ancho = key.nextInt();
+							}else {
+								System.out.print("litros del terremoto: ");
+								largo = key.nextFloat();
+								ancho = 0;
+							}
 							do {
 								System.out.println("Fecha (YYYY-MM-DD): ");
 								opcion = key.nextLine();
@@ -347,10 +356,25 @@ do {
 								}
 							}while(opcion.split("-").length !=3);
 							
+							if(valorRegistros >= 200) {
+								System.out.println("ERROR NO HAY MAS ESPACIO PARA REGISTROS, INTENTE ELIMINAR");
+							} else{
+								valorRegistros = 1;
+								listaConsumo[aux] = new Consumidos(amigos[i], "Choripan",largo , ancho, opcion);
+								try (BufferedWriter escribir = new BufferedWriter(new FileWriter(ruta2, true))){
+									escribir.newLine();
+									escribir.write("hola");
+									System.out.println("registro añadido con exito");
+									
+								}catch(IOException e) {
+									e.printStackTrace();
+								}
+								
+							}
+							
 						//AÑADIR TERREMOTO
 							
-						}else if(opcion.equals("2")) {
-							
+
 						}else if(opcion.equals("3")) {
 							
 						}else {
@@ -362,10 +386,19 @@ do {
 				}else if(opcion.equals("2")) {
 					
 					System.out.println("se escogio 2");
-					
+				//ELIMINAR REGISTRO
 				}else if(opcion.equals("3")) {
-					System.out.println("se escogio 3");
-				}
+					opcion = "";
+					while(!opcion.equals("3")){
+						System.out.println("");
+						System.out.println("Tipo de registro a eliminar: ");
+						System.out.println("  [1] Choripan");
+						System.out.println("  [2] Terremoto");
+						System.out.println("  [3] Camcelar");
+						System.out.print("Seleccione una opcion: ");
+						break;
+					}
+					opcion = key.nextLine();
 				System.out.println("saliendo...");
 			}else if (opcion.equals("3")) {
 				
@@ -389,7 +422,8 @@ do {
 		
 		
 
-}while(!opcion.equals("4"));
+			}
+	}while(!opcion.equals("4"));
 }	
 	
 	
